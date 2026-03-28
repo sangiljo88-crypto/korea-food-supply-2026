@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 한국 외식산업 및 식자재 시장 구조 분석</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; background: #F8F7F4; }
+        .chart-box { position: relative; width: 100%; height: 320px; }
+        .chart-box-lg { height: 400px; }
+        @media(min-width:768px) { .chart-box { height: 350px; } .chart-box-lg { height: 440px; } }
+        .kpi { transition: transform .2s, box-shadow .2s; border-left: 4px solid transparent; }
+        .kpi:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -6px rgba(0,0,0,.1); }
+        .card { transition: box-shadow .2s; }
+        .card:hover { box-shadow: 0 8px 20px -4px rgba(0,0,0,.08); }
+        .tab { transition: all .2s; }
+        .tab.on { background: #1C1917; color: #FAFAF9; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+        .acc { cursor: pointer; transition: all .25s; }
+        .acc:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -4px rgba(0,0,0,.1); }
+        .acc .body { max-height: 0; overflow: hidden; transition: max-height .4s, padding .3s; }
+        .acc.open .body { max-height: 600px; padding-top: 12px; }
+        .acc .chev { transition: transform .3s; }
+        .acc.open .chev { transform: rotate(180deg); }
+        .bar-h { height: 10px; border-radius: 5px; background: #e7e5e4; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 5px; transition: width 1s ease-out; }
+        .badge { display: inline-flex; align-items: center; gap: 3px; font-size: .6rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; }
+        .b-ok { background: #dcfce7; color: #166534; }
+        .b-est { background: #fef3c7; color: #92400e; }
+        .b-no { background: #fee2e2; color: #991b1b; }
+        .flow-arr { display: none; }
+        @media(min-width:768px) { .flow-arr { display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #a8a29e; min-width: 28px; } }
+        .flow-arr-v { display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #a8a29e; padding: 3px 0; }
+        @media(min-width:768px) { .flow-arr-v { display: none; } }
+        @keyframes fi { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+        .fi { animation: fi .35s ease-out; }
+        .src { font-size: .58rem; color: #a8a29e; border: 1px solid #e7e5e4; padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+    </style>
+</head>
+<body class="text-stone-800 antialiased selection:bg-amber-200 selection:text-stone-900">
+
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-stone-50 py-14 px-6 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+        <p class="text-amber-400 font-semibold text-xs tracking-[.2em] uppercase mb-3">Market Structure Analysis — 2026 Baseline</p>
+        <h1 class="text-3xl md:text-5xl font-black mb-5 tracking-tight leading-tight">2026 한국 외식산업 &<br class="hidden md:block"> 식자재 시장 구조 분석</h1>
+        <p class="text-base md:text-lg text-stone-300 max-w-3xl leading-relaxed">64~65조 원 B2B 식자재 시장의 원산지 구조(국산 44.3% vs 수입산 55.7%), 외식업 한식·중식 비중, 123개 품목별 국산/수입 비율을 공식 통계와 교차 검증하여 분석합니다.</p>
+        <div class="flex flex-wrap gap-2 mt-5">
+            <span class="badge b-ok">● 공식통계</span>
+            <span class="badge b-est">● 업계추정</span>
+            <span class="badge b-no">● 자료부족</span>
+            <span class="text-xs text-stone-500 ml-1 self-center">각 수치의 신뢰도를 뱃지로 표시</span>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 md:px-6 py-10 space-y-14">
+
+<!-- KPI -->
+<section>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="kpi bg-white p-5 rounded-xl shadow-sm border border-stone-100" style="border-left-color:#B45309">
+            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">B2B 식자재 시장</p>
+            <p class="text-2xl md:text-3xl font-black text-stone-900">64~65<span class="text-sm font-bold text-stone-400">조원</span></p>
+            <p class="text-xs text-stone-400 mt-1">KDFA 2024: 64조 / 2026(E): 65조</p>
+            <span class="badge b-est mt-2">협회추정</span>
+        </div>
+        <div class="kpi bg-white p-5 rounded-xl shadow-sm border border-stone-100" style="border-left-color:#5C7360">
+            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">국산 원료 비중 (금액)</p>
+            <p class="text-2xl md:text-3xl font-black" style="color:#5C7360">44.3<span class="text-sm font-bold text-stone-400">%</span></p>
+            <p class="text-xs text-stone-400 mt-1">≈ 28.6조원 (64.5조 기준)</p>
+            <span class="badge b-ok mt-2">공식통계</span>
+        </div>
+        <div class="kpi bg-white p-5 rounded-xl shadow-sm border border-stone-100" style="border-left-color:#BF563C">
+            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">수입 원료 비중 (금액)</p>
+            <p class="text-2xl md:text-3xl font-black" style="color:#BF563C">55.7<span class="text-sm font-bold text-stone-400">%</span></p>
+            <p class="text-xs text-stone-400 mt-1">≈ 35.9조원 / 물량 기준 68%</p>
+            <span class="badge b-ok mt-2">공식통계</span>
+        </div>
+        <div class="kpi bg-white p-5 rounded-xl shadow-sm border border-stone-100" style="border-left-color:#737E8C">
+            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">식량 자급률 (2024)</p>
+            <p class="text-2xl md:text-3xl font-black text-stone-900">47.9<span class="text-sm font-bold text-stone-400">%</span></p>
+            <p class="text-xs text-stone-400 mt-1">곡물(사료포함) 21.6%</p>
+            <span class="badge b-ok mt-2">공식통계</span>
+        </div>
+        <div class="kpi bg-white p-5 rounded-xl shadow-sm border border-stone-100" style="border-left-color:#6366f1">
+            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">외식업 한식 비중</p>
+            <p class="text-2xl md:text-3xl font-black text-stone-900">62<span class="text-sm font-bold text-stone-400">%</span></p>
+            <p class="text-xs text-stone-400 mt-1">식자재 소비 기준 / 사업체수 42%</p>
+            <span class="badge b-est mt-2">업계추정</span>
+        </div>
+    </div>
+</section>
+
+<!-- S1: 외식업 업종별 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Section 01</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">외식업 업종별 식자재 소비 구조</h2>
+        <p class="text-stone-500 leading-relaxed max-w-4xl">B2B 식자재의 최대 수요처인 외식업(전체의 60~65%)의 업종별 비중입니다. 한식이 62%로 식자재 소비를 지배하며, 중식은 5%로 밀가루·양파·수입 해산물 의존도가 높습니다.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-stone-100 card">
+            <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-lg font-bold">외식업 내 업종별 식자재 소비 비중</h3>
+                <span class="badge b-est">업계추정</span>
+            </div>
+            <p class="text-sm text-stone-400 mb-4">2026(E) 기준 | 출처: 한국식자재유통협회, 외식업체 경영실태조사 종합</p>
+            <div class="chart-box"><canvas id="cCuisine"></canvas></div>
+        </div>
+        <div class="lg:col-span-2 space-y-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-100 card">
+                <h4 class="font-bold text-sm text-stone-900 mb-3">업종별 핵심 데이터</h4>
+                <div class="space-y-2 text-sm" id="cuisineList">
+                    <div class="flex justify-between items-center"><span>한식</span><span class="font-bold">62% <span class="text-stone-400 text-xs">· 식재료비 41.2%</span></span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:62%;background:#5C7360"></div></div>
+                    <div class="flex justify-between items-center"><span>분식/김밥</span><span class="font-bold">9%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:9%;background:#D9BA82"></div></div>
+                    <div class="flex justify-between items-center"><span>치킨</span><span class="font-bold">7%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:7%;background:#f59e0b"></div></div>
+                    <div class="flex justify-between items-center"><span>중식</span><span class="font-bold">5% <span class="text-stone-400 text-xs">· 식재료비 38.6%</span></span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:5%;background:#BF563C"></div></div>
+                    <div class="flex justify-between items-center"><span>제과/베이커리</span><span class="font-bold">4%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:4%;background:#a78bfa"></div></div>
+                    <div class="flex justify-between items-center"><span>피자/햄버거</span><span class="font-bold">4%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:4%;background:#60a5fa"></div></div>
+                    <div class="flex justify-between items-center"><span>일식</span><span class="font-bold">3%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:3%;background:#8C6B5D"></div></div>
+                    <div class="flex justify-between items-center"><span>기타</span><span class="font-bold">6%</span></div>
+                    <div class="bar-h"><div class="bar-fill" style="width:6%;background:#737E8C"></div></div>
+                </div>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800 leading-relaxed">
+                <strong class="text-amber-900">비중 정의 주의:</strong> "한식 62%"는 <strong>식자재 소비 기준</strong>. 사업체 수 기준으로는 41.8%(농식품부), 일반음식점 매출 시뮬레이션 기준으로는 81.9%(GPT보고서). 모수에 따라 크게 달라집니다.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- S2: 원산지 구조 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Section 02</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">64~65조 원 식자재 시장의 원산지 구조</h2>
+        <p class="text-stone-500 leading-relaxed max-w-4xl"><strong class="text-stone-700">2025 식품산업 원료소비 실태조사(농식품부 공식)</strong>로 확인: 물량 기준 국산 32.0%, 금액 기준 국산 44.3%. 국산 단가가 수입산보다 높아 물량 대비 금액 비중이 12.3%p 높습니다.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-stone-100 card">
+            <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-lg font-bold">원산지별 비중 — 물량 vs 금액</h3>
+                <span class="badge b-ok">공식통계</span>
+            </div>
+            <p class="text-sm text-stone-400 mb-4">2024년 기준 | 식품산업 원료소비 실태조사</p>
+            <div class="chart-box"><canvas id="cOrigin"></canvas></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-stone-100 card">
+            <div class="flex items-center gap-2 mb-1">
+                <h3 class="text-lg font-bold">수입산(55.7%) 국가별 세분화</h3>
+                <span class="badge b-est">업계추정</span>
+            </div>
+            <p class="text-sm text-stone-400 mb-4">전체 64.5조원 기준 | 수입산 35.9조원 배분</p>
+            <div class="chart-box"><canvas id="cCountry"></canvas></div>
+            <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+                <div class="bg-stone-50 rounded-lg p-3 border border-stone-100">
+                    <p class="text-[10px] font-bold text-stone-400">중국산</p>
+                    <p class="text-lg font-black" style="color:#BF563C">9.1%</p>
+                    <p class="text-[10px] text-stone-400">≈ 5.9조원</p>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-3 border border-stone-100">
+                    <p class="text-[10px] font-bold text-stone-400">미국산</p>
+                    <p class="text-lg font-black" style="color:#3b82f6">9.8%</p>
+                    <p class="text-[10px] text-stone-400">≈ 6.3조원</p>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-3 border border-stone-100">
+                    <p class="text-[10px] font-bold text-stone-400">기타수입</p>
+                    <p class="text-lg font-black" style="color:#737E8C">36.8%</p>
+                    <p class="text-[10px] text-stone-400">≈ 23.7조원</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-5">
+        <div class="flex items-start gap-3">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+                <p class="font-bold text-amber-900 mb-1">중국산 9.1%의 숨겨진 위력</p>
+                <p class="text-sm text-amber-800 leading-relaxed">전체 시장의 9.1%에 불과하지만, 수입 김치의 99.9%가 중국산이고, 고춧가루 수입 비중 60.3%, 마늘 수입의 99.6%가 중국산입니다. 한식의 핵심 양념·반찬류에 편중되어 있어, 이 공급이 차단되면 전국 식당의 즉각적 원가 폭등이 불가피합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- S3: 품목별 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Section 03</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">품목별 국산 vs 수입산 비율</h2>
+        <p class="text-stone-500 leading-relaxed max-w-4xl">2025 식품산업 원료소비 실태조사 및 업계 분석 기반. 카테고리를 선택하면 상세 품목별 국산 비중을 확인할 수 있습니다.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 mb-6" id="tabs">
+        <button class="tab on px-4 py-2 rounded-full text-sm font-semibold bg-stone-100 text-stone-600" data-t="veg">채소·양념</button>
+        <button class="tab px-4 py-2 rounded-full text-sm font-semibold bg-stone-100 text-stone-600" data-t="grain">곡물·유지</button>
+        <button class="tab px-4 py-2 rounded-full text-sm font-semibold bg-stone-100 text-stone-600" data-t="meat">축산·수산</button>
+        <button class="tab px-4 py-2 rounded-full text-sm font-semibold bg-stone-100 text-stone-600" data-t="dairy">유가공·전분·당</button>
+        <button class="tab px-4 py-2 rounded-full text-sm font-semibold bg-stone-100 text-stone-600" data-t="summary">종합 요약</button>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-stone-100 card">
+            <div id="chartTitle"><h3 class="text-lg font-bold">채소·양념류 국산 비중</h3>
+                <p class="text-sm text-stone-400 mb-4">막대를 클릭하면 우측 패널에 상세 정보 표시</p>
+            </div>
+            <div class="chart-box chart-box-lg"><canvas id="cItem"></canvas></div>
+        </div>
+        <div class="lg:col-span-2 flex flex-col">
+            <div id="detailPanel" class="flex-grow bg-white rounded-xl shadow-sm border border-stone-100 p-6 card min-h-[300px]">
+                <div class="flex items-center justify-center h-full text-stone-400 text-center">
+                    <div><p class="text-4xl mb-3">📊</p><p class="font-medium">좌측 차트의 막대를<br>클릭해주세요</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- S4: 공급망 플로우 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Section 04</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">공급망 밸류체인</h2>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-stone-100 p-6 md:p-8 card">
+        <div class="flex flex-col md:flex-row md:items-stretch gap-0">
+            <div class="flex-1 bg-slate-50 rounded-lg p-4 border border-slate-200 text-center">
+                <p class="text-2xl mb-1">🌾</p><p class="font-bold text-xs text-stone-800">글로벌 원물</p>
+                <p class="text-[11px] text-stone-500 mt-1">미국·호주 = 곡물·육류<br>중국 = 양념채소·김치</p>
+            </div>
+            <div class="flow-arr">→</div><div class="flow-arr-v">↓</div>
+            <div class="flex-1 bg-amber-50 rounded-lg p-4 border border-amber-200 text-center">
+                <p class="text-2xl mb-1">🏭</p><p class="font-bold text-xs text-stone-800">수입+국내생산</p>
+                <p class="text-[11px] text-stone-500 mt-1">원료 1,905만톤 사용<br>국산 32%(물량) / 44.3%(금액)</p>
+            </div>
+            <div class="flow-arr">→</div><div class="flow-arr-v">↓</div>
+            <div class="flex-1 bg-emerald-50 rounded-lg p-4 border border-emerald-200 text-center">
+                <p class="text-2xl mb-1">🚛</p><p class="font-bold text-xs text-stone-800">B2B 식자재유통</p>
+                <p class="text-[11px] text-stone-500 mt-1">64~65조원 시장<br>기업형 14%(8.8조)</p>
+            </div>
+            <div class="flow-arr">→</div><div class="flow-arr-v">↓</div>
+            <div class="flex-1 bg-rose-50 rounded-lg p-4 border border-rose-200 text-center">
+                <p class="text-2xl mb-1">🍽️</p><p class="font-bold text-xs text-stone-800">외식 60~65%</p>
+                <p class="text-[11px] text-stone-500 mt-1">한식 62% / 중식 5%<br>급식 15~20%</p>
+            </div>
+            <div class="flow-arr">→</div><div class="flow-arr-v">↓</div>
+            <div class="flex-1 bg-violet-50 rounded-lg p-4 border border-violet-200 text-center">
+                <p class="text-2xl mb-1">👤</p><p class="font-bold text-xs text-stone-800">소비자 식탁</p>
+                <p class="text-[11px] text-stone-500 mt-1">식량자급률 47.9%<br>곡물자급률 21.6%</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- S5: 메가 트렌드 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Section 05</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">메가 트렌드</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="accBox">
+        <div class="acc bg-white rounded-xl shadow-sm border border-stone-100 p-5">
+            <div class="flex items-start justify-between"><div class="flex items-start gap-3"><span class="text-xl">⚡</span><div><p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">01</p><h4 class="font-bold text-stone-900 text-sm">중국산 의존 고착화</h4></div></div><span class="chev text-stone-400">▼</span></div>
+            <div class="body"><p class="text-sm text-stone-600 leading-relaxed">수입 김치 중 중국산 99.9%, 2025년 사상 최대 $1.98억 수입. 외식업체 자체 김치 비중 41.5%→31.3%로 감소(2020→2024). 배추값 안정에도 중국산 김치 의존이 "고착화"되고 있습니다.</p></div>
+        </div>
+        <div class="acc bg-white rounded-xl shadow-sm border border-stone-100 p-5">
+            <div class="flex items-start justify-between"><div class="flex items-start gap-3"><span class="text-xl">🏫</span><div><p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">02</p><h4 class="font-bold text-stone-900 text-sm">K-Food 수출과 국산 원료 괴리</h4></div></div><span class="chev text-stone-400">▼</span></div>
+            <div class="body"><p class="text-sm text-stone-600 leading-relaxed">K-Food 수출 $99.8억(2024) 역대 최대이나, 라면 국산 원료 5%, 과자류 15.4%, 소스류 19.4%. 식품 수출이 국내 농업과 연계되지 못하고 있어 구조적 모순이 심화됩니다.</p></div>
+        </div>
+        <div class="acc bg-white rounded-xl shadow-sm border border-stone-100 p-5">
+            <div class="flex items-start justify-between"><div class="flex items-start gap-3"><span class="text-xl">🌾</span><div><p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">03</p><h4 class="font-bold text-stone-900 text-sm">곡물 자급률 극단적 격차</h4></div></div><span class="chev text-stone-400">▼</span></div>
+            <div class="body"><p class="text-sm text-stone-600 leading-relaxed">쌀 96.0% vs 밀 0.4%(원료소비 기준), 옥수수 0.1%, 대두 6.0%. 밀가루(소맥분) 국산 비중 0.2%. 밀 자급률을 5%로 올리겠다던 정부 목표도 2025년 기준 여전히 2% 미만.</p></div>
+        </div>
+        <div class="acc bg-white rounded-xl shadow-sm border border-stone-100 p-5">
+            <div class="flex items-start justify-between"><div class="flex items-start gap-3"><span class="text-xl">☁️</span><div><p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">04</p><h4 class="font-bold text-stone-900 text-sm">기업형 식자재 유통 확장</h4></div></div><span class="chev text-stone-400">▼</span></div>
+            <div class="body"><p class="text-sm text-stone-600 leading-relaxed">63조 시장 중 기업형 비중 14%(8.8조)에 불과하고 나머지 85%는 영세사업자. CJ프레시웨이·현대그린푸드 등 대형 B2B 유통사의 M&A와 채널 다변화가 가속화되며 시장 구조 재편 중.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- S6: 결론 -->
+<section>
+    <div class="bg-stone-900 text-stone-100 rounded-2xl p-8 md:p-10">
+        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Conclusion</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-50 mt-2 mb-5">결론 — 공식 통계가 보여주는 한국 식탁의 실체</h2>
+        <div class="space-y-4 text-stone-300 leading-relaxed">
+            <p>식품산업 원료소비 실태조사(2024 기준)가 명확히 증명합니다: <strong class="text-stone-100">물량의 68%가 수입산</strong>이며, 금액으로도 <strong class="text-amber-400">55.7%가 수입산</strong>입니다. 배추·무·계란은 100% 자급이 가능하지만, <strong class="text-stone-100">밀 0.4%, 옥수수 0.1%, 팜유 0%, 설탕원료 0%</strong>라는 극단적 수입 의존이 한국 외식의 기초를 형성하고 있습니다.</p>
+            <p>중국산은 전체의 9.1%에 불과하나, 그 편중 영역이 <strong class="text-amber-400">김치(99.9%), 고춧가루(60%+), 마늘·전분·당면</strong> 등 한식의 정체성 품목이라는 점에서 공급망 리스크가 금액 비중을 훨씬 초과합니다.</p>
+            <p>향후 외식업계 구조 조정이 심화될수록, 표준화된 수입 식자재의 혼합 비율이 대한민국 외식 경제의 생존을 결정짓는 가장 핵심적인 변수가 될 것입니다.</p>
+        </div>
+    </div>
+</section>
+
+<!-- S7: 데이터 신뢰도 -->
+<section>
+    <div class="mb-6">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Appendix</span>
+        <h2 class="text-2xl md:text-3xl font-black text-stone-900 mt-1 mb-2">데이터 출처 및 신뢰도</h2>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-stone-100 p-6 overflow-x-auto card">
+        <table class="w-full text-sm min-w-[600px]">
+            <thead><tr class="border-b-2 border-stone-200">
+                <th class="text-left py-3 pr-4 font-bold text-stone-700">데이터 항목</th>
+                <th class="text-center py-3 px-3 font-bold">신뢰도</th>
+                <th class="text-left py-3 pl-3 font-bold text-stone-700">출처</th>
+            </tr></thead>
+            <tbody class="divide-y divide-stone-100">
+                <tr><td class="py-3 pr-4">국산 44.3% / 수입 55.7% (금액)</td><td class="text-center"><span class="badge b-ok">높음</span></td><td class="py-3 pl-3 text-xs text-stone-500">2025 식품산업 원료소비 실태조사 (농식품부)</td></tr>
+                <tr><td class="py-3 pr-4">국산 32.0% / 수입 68.0% (물량)</td><td class="text-center"><span class="badge b-ok">높음</span></td><td class="py-3 pl-3 text-xs text-stone-500">동일 조사</td></tr>
+                <tr><td class="py-3 pr-4">품목별 국산/수입 비율 (123개)</td><td class="text-center"><span class="badge b-ok">높음</span></td><td class="py-3 pl-3 text-xs text-stone-500">동일 조사 부록</td></tr>
+                <tr><td class="py-3 pr-4">식자재 시장 64~65조원</td><td class="text-center"><span class="badge b-est">중간</span></td><td class="py-3 pl-3 text-xs text-stone-500">한국식자재유통협회(KDFA) 추정</td></tr>
+                <tr><td class="py-3 pr-4">외식업 한식 62% / 중식 5%</td><td class="text-center"><span class="badge b-est">중간</span></td><td class="py-3 pl-3 text-xs text-stone-500">업계 종합 추정 (식자재 소비 기준)</td></tr>
+                <tr><td class="py-3 pr-4">수입산 내 중국 9.1% / 미국 9.8%</td><td class="text-center"><span class="badge b-est">중간</span></td><td class="py-3 pl-3 text-xs text-stone-500">수입식품 현황통계 + 업계 분석</td></tr>
+                <tr><td class="py-3 pr-4">쌀 자급률 96.0%, 밀 자급률</td><td class="text-center"><span class="badge b-ok">높음</span></td><td class="py-3 pl-3 text-xs text-stone-500">농림축산식품부 2024 식량자급률</td></tr>
+                <tr><td class="py-3 pr-4">김치 수입 중국산 99.9%</td><td class="text-center"><span class="badge b-ok">높음</span></td><td class="py-3 pl-3 text-xs text-stone-500">관세청 수출입무역통계</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</main>
+
+<footer class="bg-stone-100 border-t border-stone-200 py-8 text-center text-xs text-stone-400 px-4">
+    <p class="font-medium text-stone-500 mb-1">2026 한국 외식산업 및 식자재 시장 구조 분석 Dashboard</p>
+    <p>출처: 농식품부 2025 식품산업 원료소비 실태조사, 한국식자재유통협회, 관세청, 한국농촌경제연구원, 한국무역통계진흥원</p>
+</footer>
+
+<script>
+const CK='rgba(92,115,96,.8)',CKb='rgba(92,115,96,1)',CC='rgba(191,86,60,.8)',CCb='rgba(191,86,60,1)',CO='rgba(115,126,140,.8)',COb='rgba(115,126,140,1)';
+Chart.defaults.font.family="'Noto Sans KR',sans-serif";
+Chart.defaults.color='#78716c';
+
+// S1: Cuisine
+new Chart(document.getElementById('cCuisine'),{type:'doughnut',data:{labels:['한식 62%','분식/김밥 9%','치킨 7%','중식 5%','제과 4%','피자/버거 4%','일식 3%','기타 6%'],datasets:[{data:[62,9,7,5,4,4,3,6],backgroundColor:['rgba(92,115,96,.85)','rgba(217,186,130,.8)','rgba(245,158,11,.7)','rgba(191,86,60,.8)','rgba(167,139,250,.7)','rgba(96,165,250,.7)','rgba(140,107,93,.8)','rgba(115,126,140,.7)'],borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyleWidth:8,font:{size:10,weight:'500'}}},tooltip:{backgroundColor:'rgba(28,25,23,.92)',padding:10}}}});
+
+// S2: Origin comparison
+new Chart(document.getElementById('cOrigin'),{type:'bar',data:{labels:['물량 기준','금액 기준'],datasets:[{label:'국산',data:[32,44.3],backgroundColor:CK},{label:'수입산',data:[68,55.7],backgroundColor:CC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11,weight:'600'}}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw}%`}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+
+// S2: Country
+new Chart(document.getElementById('cCountry'),{type:'doughnut',data:{labels:['국산 44.3%','중국산 9.1%','미국산 9.8%','기타수입 36.8%'],datasets:[{data:[44.3,9.1,9.8,36.8],backgroundColor:[CK,CC,'rgba(59,130,246,.75)',CO],borderWidth:2,borderColor:'#fff',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyleWidth:8,font:{size:10,weight:'500'}}},tooltip:{backgroundColor:'rgba(28,25,23,.92)',padding:10,callbacks:{label:c=>{let w=(64.5*(c.raw/100)).toFixed(1);return` ${c.raw}% (≈${w}조원)`}}}}}});
+
+// S3: Item data
+const cats={
+veg:{title:'채소·양념류 국산 비중',labels:['배추·무','양파','파','생강','마늘','고추(신선)','고춧가루','건고추'],data:[100,93.6,89.2,86.5,76.7,54.4,39.7,40.8],details:{
+'배추·무':{t:'배추 / 무 — 100% 국산',d:'원물 기준 완전 자급. 단, 가공품(김치)으로 전환 시 수입 중국산 비중 급등. 국내 소비 김치 중 36~40%가 수입산(중국 99.9%).',s:[{l:'원물',v:'100%',c:CKb},{l:'김치 수입비',v:'36~40%',c:CCb},{l:'김치 수입국',v:'중국 99.9%',c:CCb}]},
+'양파':{t:'양파 — 국산 93.6%',d:'국내 자급 우수. 수입산 6.4%는 주로 중국산 탈수·냉동 양파.',s:[{l:'국산',v:'93.6%',c:CKb},{l:'수입',v:'6.4%',c:CCb}]},
+'파':{t:'파 — 국산 89.2%',d:'신선 파는 국내 자급 양호. 수입산 10.8%는 중국산 깐파, 냉동파 등 가공 형태.',s:[{l:'국산',v:'89.2%',c:CKb},{l:'수입',v:'10.8%',c:CCb}]},
+'생강':{t:'생강 — 국산 86.5%',d:'국산 자급 양호하나 가공용(편생강, 분말)에서 수입 증가 추세.',s:[{l:'국산',v:'86.5%',c:CKb},{l:'수입',v:'13.5%',c:CCb}]},
+'마늘':{t:'마늘 — 국산 76.7%',d:'수입 마늘의 99.6%가 중국산. 깐마늘·다진마늘 형태 유통 증가. 2025년 냉동마늘 수입량 약 4만톤으로 전년 대비 11%↑.',s:[{l:'국산',v:'76.7%',c:CKb},{l:'중국산 비중',v:'수입의 99.6%',c:CCb},{l:'형태',v:'깐마늘·냉동',c:'#f97316'}]},
+'고추(신선)':{t:'고추(신선) — 국산 54.4%',d:'신선 고추는 과반을 국내 생산이 담당하나, 냉동고추 수입이 증가 추세.',s:[{l:'국산',v:'54.4%',c:CKb},{l:'수입',v:'45.6%',c:CCb}]},
+'고춧가루':{t:'고춧가루 — 국산 39.7%',d:'한식 정체성 품목이나 수입산(주로 중국)이 시장 60.3% 장악. 2022년 수입 중 중국산 비중 94.3%. 가격 차이가 핵심 원인.',s:[{l:'국산',v:'39.7%',c:CKb},{l:'수입',v:'60.3%',c:CCb},{l:'수입 중 중국',v:'94%+',c:CCb}]},
+'건고추':{t:'건고추 — 국산 40.8%',d:'고춧가루와 유사한 구조. 냉동고추 관세 27%로 건고추(270%)의 1/10 수준이라 냉동 형태 우회 수입 증가.',s:[{l:'국산',v:'40.8%',c:CKb},{l:'수입',v:'59.2%',c:CCb}]}
+}},
+grain:{title:'곡물·유지류 국산 비중',labels:['쌀','참기름','대두(콩)','보리','옥수수','밀(소맥)','소맥분','팜유','대두유'],data:[60,18,6,48.7,0.1,0.4,0.2,0,1],details:{
+'쌀':{t:'쌀 — 식품용 국산 60%',d:'자급률 96%이나 식품제조업 기준 가공용·외식용 저가 TRQ 수입쌀 유통으로 실제 사용 비중은 60%. 금액 기준으로는 국산 74.8%.',s:[{l:'자급률',v:'96.0%',c:CKb},{l:'식품용 국산',v:'60%(물량)',c:CKb},{l:'금액 기준',v:'74.8%',c:CKb}]},
+'참기름':{t:'참기름 — 국산 18%',d:'국산 참깨 생산량 극소. 중국·인도·아프리카산 참깨 82% 사용. 금액 기준 국산 비중도 18% 수준.',s:[{l:'국산',v:'18%',c:CKb},{l:'수입',v:'82%',c:CCb}]},
+'대두(콩)':{t:'대두 — 국산 6.0%',d:'식용 콩 중 국산 6%. 대두유, 두부 등 대량 소비 품목은 미국·브라질산이 절대적.',s:[{l:'국산',v:'6.0%',c:CKb},{l:'수입',v:'94.0%',c:CCb}]},
+'보리':{t:'보리 — 국산 48.7%',d:'곡물 중 자급률이 비교적 양호한 편. 맥주·식혜 등 가공용으로 사용.',s:[{l:'국산',v:'48.7%',c:CKb},{l:'수입',v:'51.3%',c:CCb}]},
+'옥수수':{t:'옥수수 — 국산 0.1%',d:'사실상 전량 수입. 미국, 우크라이나, 브라질산이 주도. 사료용 포함 시 대규모 수입.',s:[{l:'국산',v:'0.1%',c:'#ef4444'},{l:'수입',v:'99.9%',c:CCb}]},
+'밀(소맥)':{t:'밀 — 국산 0.4%',d:'사실상 전량 수입. 미국·캐나다·호주산. 국산밀 재고 6만톤 쌓여있으나 판로 부재.',s:[{l:'국산',v:'0.4%',c:'#ef4444'},{l:'수입',v:'99.6%',c:CCb}]},
+'소맥분':{t:'소맥분(밀가루) — 국산 0.2%',d:'밀가루 연간 147만톤 사용 중 국산 0.2%. 라면 국산 비중 5%. 짜장면·소면·빵 모두 수입밀 의존.',s:[{l:'국산',v:'0.2%',c:'#ef4444'},{l:'수입',v:'99.8%',c:CCb}]},
+'팜유':{t:'팜유 — 국산 0%',d:'말레이시아·인도네시아 전량 수입. 치킨·튀김류의 핵심 식용유.',s:[{l:'국산',v:'0%',c:'#ef4444'},{l:'수입',v:'100%',c:CCb}]},
+'대두유':{t:'대두유 — 국산 ~1%',d:'수입 원료를 국내에서 착유·정제하는 구조. 원료 대두 자체가 94% 수입.',s:[{l:'국산원료',v:'~1%',c:'#ef4444'},{l:'수입원료',v:'~99%',c:CCb}]}
+}},
+meat:{title:'축산·수산물 국산 비중',labels:['계란','오리고기','닭고기','돼지고기','쇠고기','오징어','명태'],data:[100,99.7,76.1,73.7,26.7,35.4,1.7],details:{
+'계란':{t:'계란 — 100% 국산',d:'국내 자급률 최상위 품목. 가금류 중 유일하게 완전 자급.',s:[{l:'국산',v:'100%',c:CKb}]},
+'오리고기':{t:'오리고기 — 국산 99.7%',d:'계란과 함께 자급률 최상위. 수입 거의 없음.',s:[{l:'국산',v:'99.7%',c:CKb}]},
+'닭고기':{t:'닭고기 — 국산 76.1%',d:'통닭 냉장육은 국내산 비중 높으나, 순살·가공육은 브라질산(수입 주력) 필수 혼용.',s:[{l:'국산',v:'76.1%',c:CKb},{l:'수입',v:'23.9%',c:CCb},{l:'주요국',v:'브라질·미국',c:COb}]},
+'돼지고기':{t:'돼지고기 — 국산 73.7%',d:'삼겹살 전문점에서 한돈 프리미엄 강세. 대량 소비 부위(찌개용·탕수육용)는 미국·EU산.',s:[{l:'국산',v:'73.7%',c:CKb},{l:'수입',v:'26.3%',c:CCb},{l:'주요국',v:'미국·EU',c:COb}]},
+'쇠고기':{t:'쇠고기 — 국산 26.7%',d:'수입 비중 73.3%로 압도적. 2024년 미국 48%, 호주 45%(격차 3%p로 축소). 한우는 프리미엄 시장에 고립.',s:[{l:'국산(한우)',v:'26.7%',c:CKb},{l:'미국산',v:'~48%',c:'#3b82f6'},{l:'호주산',v:'~45%',c:'#38bdf8'}]},
+'오징어':{t:'오징어 — 국산 35.4%',d:'중국·페루산 수입 증가. 연근해 어획량 감소로 국산 비중 하락 추세.',s:[{l:'국산',v:'35.4%',c:CKb},{l:'수입',v:'64.6%',c:CCb}]},
+'명태':{t:'명태 — 국산 1.7%',d:'러시아산에 전적 의존(98.3%). 동태찌개·황태해장국 등 한식 핵심 식자재이나 국내 어획 거의 전무.',s:[{l:'국산',v:'1.7%',c:'#ef4444'},{l:'러시아산',v:'~98%',c:CCb}]}
+}},
+dairy:{title:'유가공·전분·당류 국산 비중',labels:['원유','분유','치즈','버터','감자전분','옥수수전분','원당(설탕)'],data:[100,35,4.3,1.8,4.9,5.8,0],details:{
+'원유':{t:'원유 — 100% 국산',d:'국내 낙농업 전량 사용. 다만 가공유제품(치즈·버터)은 대부분 수입.',s:[{l:'국산',v:'100%',c:CKb}]},
+'분유':{t:'분유 — 국산 ~35%',d:'전지분유·탈지분유 합산. EU·뉴질랜드·호주산 수입이 65% 차지.',s:[{l:'국산',v:'~35%',c:CKb},{l:'수입',v:'~65%',c:CCb}]},
+'치즈':{t:'치즈 — 국산 4.3%',d:'미국·EU·호주·뉴질랜드산이 95.7%. 퓨전한식(치즈닭갈비·로제떡볶이)과 카페 성장으로 수요 폭발.',s:[{l:'국산',v:'4.3%',c:CKb},{l:'수입',v:'95.7%',c:CCb}]},
+'버터':{t:'버터 — 국산 1.8%',d:'EU·뉴질랜드·호주산이 98.2%. 베이커리 산업 성장과 직결.',s:[{l:'국산',v:'1.8%',c:'#ef4444'},{l:'수입',v:'98.2%',c:CCb}]},
+'감자전분':{t:'감자전분 — 국산 4.9%',d:'중국·동남아산이 95.1%. 가공식품(당면 등)의 핵심 원료.',s:[{l:'국산',v:'4.9%',c:'#ef4444'},{l:'수입',v:'95.1%',c:CCb}]},
+'옥수수전분':{t:'옥수수전분 — 국산 5.8%',d:'옥수수 자체가 0.1% 자급이므로 전분도 거의 전량 수입.',s:[{l:'국산',v:'5.8%',c:'#ef4444'},{l:'수입',v:'94.2%',c:CCb}]},
+'원당(설탕)':{t:'원당 — 0% (전량 수입)',d:'국내 사탕수수·사탕무 재배 없음. 전량 수입 후 국내에서 정제 가공.',s:[{l:'국산',v:'0%',c:'#ef4444'},{l:'수입',v:'100%',c:CCb}]}
+}},
+summary:{title:'카테고리별 국산 비중 종합',labels:['엽근채(배추·무 등)','양념채소(마늘·양파)','건고추·고춧가루','곡물(밀·옥수수)','가금류(닭·오리·계란)','쇠고기','수산물(명태·오징어)','식용유지','유가공(치즈·버터)','당류·전분'],data:[98.9,65.9,40,3,84,26.7,20,1,4,2],details:{
+'엽근채(배추·무 등)':{t:'엽근채류 — 97~100% 국산',d:'신선 채소 국산 자급 우수. 금액 기준 96.9%. 다만 가공품(김치)은 수입 비중 급등.',s:[{l:'물량',v:'98.9%',c:CKb},{l:'금액',v:'96.9%',c:CKb}]},
+'양념채소(마늘·양파)':{t:'양념채소류 — 70~94%',d:'물량 기준 65.9%. 마늘 76.7%, 양파 93.6%. 중국산 깐마늘·다진마늘이 가공용 시장 잠식.',s:[{l:'물량',v:'65.9%',c:CKb},{l:'금액',v:'60.1%',c:CKb}]},
+'건고추·고춧가루':{t:'건고추·고춧가루 — 40~41%',d:'한식 정체성 품목이나 수입 비중 60%. 중국산 비중이 수입의 94%+.',s:[{l:'국산',v:'40%대',c:CKb},{l:'수입 중 중국',v:'94%+',c:CCb}]},
+'곡물(밀·옥수수)':{t:'곡물류 — 0~6%',d:'쌀 제외 거의 전량 수입. 밀 0.4%, 옥수수 0.1%, 대두 6.0%.',s:[{l:'밀',v:'0.4%',c:'#ef4444'},{l:'옥수수',v:'0.1%',c:'#ef4444'},{l:'대두',v:'6.0%',c:'#ef4444'}]},
+'가금류(닭·오리·계란)':{t:'가금류 — 76~100%',d:'계란 100%, 오리 99.7%, 닭 76.1%. 국내 생산 기반 양호.',s:[{l:'계란',v:'100%',c:CKb},{l:'닭고기',v:'76.1%',c:CKb}]},
+'쇠고기':{t:'쇠고기 — 국산 26.7%',d:'호주(45%), 미국(48%) 압도적. 한우 프리미엄 시장에 고립.',s:[{l:'한우',v:'26.7%',c:CKb},{l:'수입',v:'73.3%',c:CCb}]},
+'수산물(명태·오징어)':{t:'수산물 — 품목별 편차 극심',d:'명태 1.7%(러시아 의존), 오징어 35.4%. 김·원초는 100% 국산.',s:[{l:'명태',v:'1.7%',c:'#ef4444'},{l:'오징어',v:'35.4%',c:CKb}]},
+'식용유지':{t:'식용유지 — 0~1%',d:'팜유 0%, 대두유 ~1%. 국내 원료 생산 구조 부재.',s:[{l:'팜유',v:'0%',c:'#ef4444'},{l:'대두유',v:'~1%',c:'#ef4444'}]},
+'유가공(치즈·버터)':{t:'유가공 — 2~5%',d:'원유 100% 자급이나 치즈 4.3%, 버터 1.8%. 서양식·카페 수요 증가.',s:[{l:'치즈',v:'4.3%',c:'#ef4444'},{l:'버터',v:'1.8%',c:'#ef4444'}]},
+'당류·전분':{t:'당류·전분 — 0~15%',d:'원당 0%, 감자전분 4.9%, 옥수수전분 5.8%. 가공식품 핵심 원료 수입 의존.',s:[{l:'원당',v:'0%',c:'#ef4444'},{l:'전분',v:'5~6%',c:'#ef4444'}]}
+}}
+};
+
+let itemChart;
+function renderItemChart(key){
+    const c=cats[key];
+    if(itemChart)itemChart.destroy();
+    document.getElementById('chartTitle').innerHTML=`<h3 class="text-lg font-bold">${c.title}</h3><p class="text-sm text-stone-400 mb-4">막대를 클릭하면 우측 패널에 상세 정보 표시</p>`;
+    const colors=c.data.map(v=>v>=70?CK:v>=40?'rgba(217,186,130,.8)':'rgba(191,86,60,.75)');
+    itemChart=new Chart(document.getElementById('cItem'),{type:'bar',data:{labels:c.labels,datasets:[{label:'국산 비중 (%)',data:c.data,backgroundColor:colors,borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(28,25,23,.92)',padding:10,callbacks:{label:x=>` 국산 ${x.raw}% / 수입 ${(100-x.raw).toFixed(1)}%`}}},scales:{x:{max:100,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{weight:'600',size:11}}}},onClick:(e,el)=>{if(el.length>0){const lb=c.labels[el[0].index];showDetail(key,lb)}}}});
+    document.getElementById('detailPanel').innerHTML='<div class="flex items-center justify-center h-full text-stone-400 text-center"><div><p class="text-4xl mb-3">📊</p><p class="font-medium">좌측 차트의 막대를<br>클릭해주세요</p></div></div>';
+}
+
+function showDetail(cat,label){
+    const d=cats[cat].details[label];if(!d)return;
+    const p=document.getElementById('detailPanel');
+    p.innerHTML=`<div class="fi h-full flex flex-col justify-between"><div><h4 class="text-base font-bold text-stone-900 mb-3">${d.t}</h4><div class="grid grid-cols-${d.s.length} gap-2 mb-4">${d.s.map(s=>`<div class="bg-stone-50 rounded-lg p-2 text-center border border-stone-100"><p class="text-[10px] font-semibold text-stone-400 uppercase leading-tight">${s.l}</p><p class="text-sm font-bold mt-0.5" style="color:${s.c}">${s.v}</p></div>`).join('')}</div><p class="text-sm text-stone-600 leading-relaxed">${d.d}</p></div></div>`;
+}
+
+renderItemChart('veg');
+
+document.getElementById('tabs').addEventListener('click',e=>{
+    const b=e.target.closest('.tab');if(!b)return;
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+    b.classList.add('on');
+    renderItemChart(b.dataset.t);
+});
+
+document.getElementById('accBox').addEventListener('click',e=>{
+    const c=e.target.closest('.acc');if(!c)return;
+    const o=c.classList.contains('open');
+    document.querySelectorAll('.acc').forEach(a=>a.classList.remove('open'));
+    if(!o)c.classList.add('open');
+});
+</script>
+</body>
+</html>
